@@ -1,4 +1,5 @@
-console.log("index.js");
+{
+    console.log("index.js");
 errorMessage = document.getElementById("errorMessage");
 chatText = "chatTranscript.lines";
 console.log(chatText); 
@@ -49,3 +50,4 @@ var notifyWhenDone = function(error) {
 
 lpTag.agentSDK.init({});
 lpTag.agentSDK.bind(chatText, updateCallback, notifyWhenDone);
+}
