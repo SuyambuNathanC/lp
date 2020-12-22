@@ -1,17 +1,11 @@
-console.log("index.js");
 errorMessage = document.getElementById("errorMessage");
-chatText = "chatTranscript.lines";
-console.log(chatText); 
+chatData = "chatTranscript.lines";
 
 var updateCallback = function(data){
     var value = data.newValue;
-    
-    console.log("value : "+value);
     var line = value[value.length -1];
-    console.log("line : "+line);
     var movieName = line.text;
-    console.log("after movieName");
-    console.log("moviename : "+movieName);
+    console.log("movie: "+movieName);
     if (line.source.toLowerCase()==="visitor"){
         var url = "https://www.omdbapi.com?apikey=9c244dec&t="+movieName;
         fetch(url)
@@ -25,27 +19,19 @@ var updateCallback = function(data){
                     document.getElementById("Actors").innerHTML = res.Actors;
                     document.getElementById("Genre").innerHTML = res.Genre;
                     document.getElementById("Plot").innerHTML = res.Plot;
-
- 
-
                 }).catch(function(error){
-                    console.log("I am inside catch");
-                    console.log("Error Message : "+error);
+                    console.log("Error: "+error);
                 })
     }
 };
 
- 
-
 var notifyWhenDone = function(error) {
     if (err){
-        console.log("I am inside notifyWhenDone function : "+err);
+        console.log("Error: "+err);
     }
-    var chatText = "chatTranscript.lines";
-    errorMessage.innerHTML = "Unable to find the movie";
+    var chatData = "chatTranscript.lines";
+    errorMessage.innerHTML = "Invalid movie name";
 };
 
- 
-
 lpTag.agentSDK.init({});
-lpTag.agentSDK.bind(chatText, updateCallback, notifyWhenDone);
+lpTag.agentSDK.bind(chatData, updateCallback, notifyWhenDone);
